@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="prettyphoto">
+	<title>Pretty Photo</title>
+	<summary>Plugin will add lightbox effect to images using PrettyPhoto library.</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>3.2.0</version>
+	<date>2015-02-03</date>
+	<category>lightbox</category>
+	<compatibility>3.2.6</compatibility>
+
+	<config group="pictures" type="divider" description="PrettyPhoto">PrettyPhoto</config>
+	<config group="pictures" name="prettyphoto_show_title" custom="1" type="radio" values="1,0" description="Show title" private="0">1</config>
+	<config group="pictures" name="prettyphoto_style" custom="1" type="select" values="dark_rounded,dark_square,facebook,light_rounded,light_square" description="PrettyPhoto style" private="0">dark_rounded</config>
+	<config group="pictures" name="prettyphoto_anim_speed" custom="1" type="select" values="fast,slow,normal" description="PrettyPhoto animation speed" private="0">fast</config>
+	<config group="pictures" name="prettyphoto_socialtools" custom="1" type="textarea" code_editor="1" description="Social tools code" private="0"><![CDATA[]]></config>
+
+	<hooks>
+		<hook name="smartyFrontAfterHeadSection,smartyAdminAfterHeadSection" type="smarty">
+			<![CDATA[
+{if 'prettyphoto' == $config.lightbox_name}
+	{ia_add_media files='css:_IA_URL_plugins/prettyphoto/js/css/prettyPhoto, js:_IA_URL_plugins/prettyphoto/js/js/jquery.prettyPhoto'}
+	{ia_add_js}
+$(function()
+{
+	$('a[rel^="ia_lightbox"]').prettyPhoto(
+	{
+		show_title: {$core.config.prettyphoto_show_title},
+		social_tools: '{$core.config.prettyphoto_socialtools}',
+		theme: '{$core.config.prettyphoto_style}',
+		animation_speed: '{$core.config.prettyphoto_anim_speed}'
+	});
+});
+	{/ia_add_js}
+{/if}
+			]]>
+		</hook>
+	</hooks>
+</plugin>
