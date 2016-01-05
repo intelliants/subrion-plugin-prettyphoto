@@ -4,10 +4,10 @@
 	<summary>Plugin will add lightbox effect to images using PrettyPhoto library.</summary>
 	<author>Intelliants LLC</author>
 	<contributor>Intelliants LLC</contributor>
-	<version>3.2.0</version>
-	<date>2015-02-03</date>
+	<version>4.0.0</version>
+	<date>2015-01-05</date>
 	<category>lightbox</category>
-	<compatibility>3.2.6</compatibility>
+	<compatibility>4.0</compatibility>
 
 	<config group="pictures" type="divider" description="PrettyPhoto">PrettyPhoto</config>
 	<config group="pictures" name="prettyphoto_show_title" custom="1" type="radio" values="1,0" description="Show title" private="0">1</config>
@@ -18,7 +18,7 @@
 	<hooks>
 		<hook name="smartyFrontAfterHeadSection,smartyAdminAfterHeadSection" type="smarty">
 			<![CDATA[
-{if 'prettyphoto' == $config.lightbox_name}
+{if 'prettyphoto' == $core.config.lightbox_name}
 	{ia_add_media files='css:_IA_URL_plugins/prettyphoto/js/css/prettyPhoto, js:_IA_URL_plugins/prettyphoto/js/js/jquery.prettyPhoto'}
 	{ia_add_js}
 $(function()
